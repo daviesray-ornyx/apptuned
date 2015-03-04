@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    
+  <head>
+    <% include ../partials/head %>    
+  </head>   
+
+  <body>   
+         
+      
+     <div class="wrapper">
+            <!--<h1>Page Title: <%= title %></h1>
+            <p>Welcome to <%= title %>. We'll be having you for a short while</p> !-->        
+         
+            
+         <div id="content" >
+               <header>
+                    <% include ../partials/header %>
+               </header>
+         </div>
+          
+         <div class="push"></div>
+     </div>
+    
+    <footer class="footer">
+        <% include ../partials/footer %>
+    </footer>
+      
+   
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        setContentSize();
+    });
+
+    function setContentSize() {
+        $('#content').height($(window).height())
+        $('#content').width($(window).width())
+    }
+
+    function showQueryModel(emailAddress, closeContactModal) {
+
+        if (closeContactModal) {
+            $('#contactsModal').modal('hide');
+        }
+        // set queryModal values
+        $('#queryModal').find('#recipient-email').val(emailAddress)
+        $('#queryModal').modal('show');
+    }
+
+    function showContactsModel() {
+        $('#contactsModal').modal('show');
+    }
+
+    function sendEmail() {
+        $('#queryModal').modal('hide');
+        // display found data
+        var toEmail = $('#queryModal').find('#recipient-email').val();
+        var fromName = $('#queryModal').find('#sender-name').val()
+        var fromEmail = $('#queryModal').find('#sender-email').val();
+        var message = $('#queryModal').find('#message-text').val();
+
+        $.post("http://localhost:3000/send_mail", { 'sender': "dawoody@gmail.com" }, function (data) {
+            alert('Post result : ' + data.status);
+        }, "json");
+
+    }
+
+</script>
+
+      <div class="modal fade" id="contactsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Contact Info</h4>
+              </div>
+              <div class="modal-body" >
+                <form class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-7" style="">
+                      <p class="form-control-static"><a href="#" onclick="showQueryModel('info@apptuned.net',true)">info@apptuned.net</a>, &nbsp; <a href="#" onclick="showQueryModel('hr@apptuned.net',true)">hr@apptuned.net</a></p>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Mobile</label>
+                    <div class="col-sm-7">
+                      <p class="form-control-static">+254 712761810, &nbsp; +254 711205520</p>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">    </label>
+                    <div class="col-sm-7">
+                      <p class="form-control-static">+254 732086847</p>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer" style="text-align: center;">
+                  © Copyright 2014 Apptuned Ltd..
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="queryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Send Query</h4>
+              </div>
+              <div class="modal-body">
+                <form role="form">
+                   <div class="form-group">
+                       <input type="text" class="form-control form-control-static" readonly="true" id="recipient-email" data-placement="right" title="Recepient Email">                        
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="sender-name" placeholder="Full Name">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="sender-email" placeholder="Email">
+                  </div>
+                  <div class="form-group">
+                    <textarea class="form-control" id="message-text" placeholder="Message"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="sendEmail()">Send message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  </body> 
+     
+</html>
+
+
+
+

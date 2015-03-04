@@ -1,0 +1,44 @@
+
+* {
+    margin: 0;
+}
+
+html, body {
+  padding: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  
+  background-color: #f8f8f8;
+  
+  height: 100%;
+}
+
+.wrapper {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        margin: 0 0 -2em 0;
+     }
+  
+.footer{
+        height: -2em;
+     }
+.push {
+        height: -2em;
+     }
+
+a {
+  color: #00B7FF;
+}
+
+#content {
+    background-color: #0099ff;
+    
+    
+    background: url(/images/bg.jpg) no-repeat center center fixed;   
+  -webkit-background-size: inherit;  
+  -moz-background-size: cover;  
+  -o-background-size: cover;  
+  background-size: cover;  
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/bg.jpg', sizingMethod='scale')";  
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/bg.jpg', sizingMethod='scale');
+}
